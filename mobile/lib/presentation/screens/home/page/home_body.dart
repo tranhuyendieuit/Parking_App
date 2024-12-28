@@ -19,8 +19,7 @@ class HomeBody extends StatefulWidget {
   State<HomeBody> createState() => _HomeBodyState();
 }
 
-class _HomeBodyState extends State<HomeBody>
-    with AutomaticKeepAliveClientMixin {
+class _HomeBodyState extends State<HomeBody> with AutomaticKeepAliveClientMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   bool get wantKeepAlive => true;
@@ -147,92 +146,90 @@ class _HomeBodyState extends State<HomeBody>
             ],
           ),
         ),
-        body: Column(
-          children: [
-            Text(Constants.parkingLot,
-                style: AppTextStyles.montserratStyle.black20Bold),
-            const SizedBox(
-              height: 10,
-            ),
-            Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-              const Avatar(
-                imageUrl: '',
-                widthAvatar: 80,
-                heightAvatar: 80,
-                radiusAvatar: 50,
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Text(Constants.parkingLot, style: AppTextStyles.montserratStyle.black20Bold),
+              const SizedBox(
+                height: 10,
+              ),
+              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                const Avatar(
+                  imageUrl: '',
+                  widthAvatar: 80,
+                  heightAvatar: 80,
+                  radiusAvatar: 50,
+                ),
+                const SizedBox(
+                  width: 20,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    if (user != null) ...[
+                      Text(
+                        '${user.firstName ?? ''} ${user.lastName ?? ''}',
+                      ),
+                      Text(
+                        user.email ?? '',
+                      ),
+                      Text(
+                        user.vehicles != null && (user.vehicles?.isNotEmpty ?? false)
+                            ? user.vehicles!.map((v) => v.plateNumber).join(', ')
+                            : 'No Plate Info',
+                      ),
+                    ]
+                  ],
+                )
+              ]),
+              const SizedBox(
+                height: 20,
+              ),
+              Wrap(
+                spacing: 10,
+                children: [
+                  CardOption(
+                      name: Constants.notification,
+                      icon: const Icon(Icons.circle_notifications, color: AppColors.mountainMeadow, size: 40),
+                      onPress: () {}),
+                  CardOption(
+                      name: Constants.viewIncommingRides,
+                      icon: const Icon(Icons.person_3_outlined, color: AppColors.mountainMeadow, size: 40),
+                      onPress: () {
+                        Navigator.pushNamed(context, AppRoutes.paymentHistory);
+                      }),
+                ],
               ),
               const SizedBox(
-                width: 20,
+                height: 10,
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              Wrap(
+                spacing: 10,
                 children: [
-                  if (user != null) ...[
-                    Text(
-                      '${user.firstName ?? ''} ${user.lastName ?? ''}',
-                    ),
-                    Text(
-                      user.email ?? '',
-                    ),
-                    Text(
-                      user.vehicles != null &&
-                              (user.vehicles?.isNotEmpty ?? false)
-                          ? user.vehicles!.map((v) => v.plateNumber).join(', ')
-                          : 'No Plate Info',
-                    ),
-                  ]
+                  CardOption(
+                      name: Constants.parkingHistory,
+                      icon: const FaIcon(
+                        FontAwesomeIcons.globe,
+                        size: 40.0,
+                        color: AppColors.mountainMeadow,
+                      ),
+                      onPress: () {
+                        Navigator.pushNamed(context, AppRoutes.parkingHistory);
+                      }),
+                  CardOption(
+                      name: Constants.contactPolice,
+                      icon: const FaIcon(
+                        FontAwesomeIcons.addressBook,
+                        size: 40.0,
+                        color: AppColors.mountainMeadow,
+                      ),
+                      onPress: () {
+                        Navigator.pushNamed(context, AppRoutes.contactPolice);
+                      }),
                 ],
-              )
-            ]),
-            const SizedBox(
-              height: 20,
-            ),
-            Wrap(
-              spacing: 10,
-              children: [
-                CardOption(
-                    name: Constants.notification,
-                    icon: const Icon(Icons.circle_notifications,
-                        color: AppColors.mountainMeadow, size: 40),
-                    onPress: () {}),
-                CardOption(
-                    name: Constants.viewIncommingRides,
-                    icon: const Icon(Icons.person_3_outlined,
-                        color: AppColors.mountainMeadow, size: 40),
-                    onPress: () {
-                      Navigator.pushNamed(context, AppRoutes.paymentHistory);
-                    }),
-              ],
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Wrap(
-              spacing: 10,
-              children: [
-                CardOption(
-                    name: Constants.parkingHistory,
-                    icon: const FaIcon(
-                      FontAwesomeIcons.globe,
-                      size: 40.0,
-                      color: AppColors.mountainMeadow,
-                    ),
-                    onPress: () {
-                      Navigator.pushNamed(context, AppRoutes.parkingHistory);
-                    }),
-                CardOption(
-                    name: Constants.contactPolice,
-                    icon: const FaIcon(
-                      FontAwesomeIcons.addressBook,
-                      size: 40.0,
-                      color: AppColors.mountainMeadow,
-                    ),
-                    onPress: () {
-                      Navigator.pushNamed(context, AppRoutes.contactPolice);
-                    }),
-              ],
-            ),
-          ],
+              ),
+            ],
+          ),
         ),
       );
     }));

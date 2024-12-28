@@ -4,5 +4,5 @@ class ApiUrls {
   static const String signUpEndpoint = "users/sign-up";
   static const String getUserEndpoint = "users/my-profile";
   static const String trackingEndpoint = "vehicle/tracking-management";
-
+  static const String paymentHistoryEndpoint = "payment/list";
 }
