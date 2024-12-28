@@ -68,9 +68,9 @@ class _LoginBodyState extends State<LoginBody> {
                         hintText: Constants.enterYourUserName,
                         initialValue: state.username,
                         onChanged: (value) {
-                          context.read<LoginBloc>().add(
-                              LoginChangeEmailPasswordEvent(
-                                  username: value, password: state.password));
+                          context
+                              .read<LoginBloc>()
+                              .add(LoginChangeEmailPasswordEvent(username: value, password: state.password));
                         },
                       ),
                       const SizedBox(height: 16),
@@ -80,36 +80,41 @@ class _LoginBodyState extends State<LoginBody> {
                         isPasswordInput: true,
                         initialValue: state.password,
                         onChanged: (value) {
-                          context.read<LoginBloc>().add(
-                              LoginChangeEmailPasswordEvent(
-                                  username: state.username, password: value));
+                          context
+                              .read<LoginBloc>()
+                              .add(LoginChangeEmailPasswordEvent(username: state.username, password: value));
                         },
                       ),
                       const SizedBox(height: 16),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Checkbox(
-                            value: isChecked,
-                            onChanged: (value) {
-                              setState(() {
-                                isChecked = value ?? false;
-                              });
-                            },
-                            activeColor: AppColors.mountainMeadow,
+                          SizedBox(
+                            width: 24,
+                            child: Checkbox(
+                              value: isChecked,
+                              onChanged: (value) {
+                                setState(() {
+                                  isChecked = value ?? false;
+                                });
+                              },
+                              activeColor: AppColors.mountainMeadow,
+                            ),
                           ),
+                          const SizedBox(width: 4),
                           Text(
                             Constants.rememberPassword,
                             style: AppTextStyles.montserratStyle.regular10Black,
                           ),
+                          const Spacer(),
                           TextButton(
+                            style: TextButton.styleFrom(padding: EdgeInsets.zero),
                             onPressed: () {
                               // Handle forgot password
                             },
                             child: Text(
                               Constants.forgotPassword,
-                              style: AppTextStyles
-                                  .montserratStyle.regular10MountainMeadow,
+                              style: AppTextStyles.montserratStyle.regular10MountainMeadow,
                             ),
                           ),
                         ],
@@ -118,9 +123,7 @@ class _LoginBodyState extends State<LoginBody> {
                       CustomButton(
                         text: Constants.login,
                         onTap: () {
-                          context
-                              .read<LoginBloc>()
-                              .add(LoginWithUsernamePasswordEvent());
+                          context.read<LoginBloc>().add(LoginWithUsernamePasswordEvent());
                         },
                         height: 50,
                         width: 260,
@@ -128,17 +131,12 @@ class _LoginBodyState extends State<LoginBody> {
                       const SizedBox(height: 16),
                       Row(
                         children: [
-                          const Expanded(
-                              child: Divider(color: AppColors.cadetGrey)),
+                          const Expanded(child: Divider(color: AppColors.cadetGrey)),
                           Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 8.0),
-                            child: Text(Constants.orLoginWith,
-                                style: AppTextStyles
-                                    .montserratStyle.regular10DimGray),
+                            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: Text(Constants.orLoginWith, style: AppTextStyles.montserratStyle.regular10DimGray),
                           ),
-                          const Expanded(
-                              child: Divider(color: AppColors.cadetGrey)),
+                          const Expanded(child: Divider(color: AppColors.cadetGrey)),
                         ],
                       ),
                       const SizedBox(height: 5),
@@ -160,12 +158,10 @@ class _LoginBodyState extends State<LoginBody> {
                           children: [
                             TextSpan(
                                 text: Constants.register,
-                                style:
-                                    AppTextStyles.montserratStyle.bold13Black,
+                                style: AppTextStyles.montserratStyle.bold13Black,
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
-                                    Navigator.pushNamed(
-                                        context, AppRoutes.register);
+                                    Navigator.pushNamed(context, AppRoutes.register);
                                   }),
                           ],
                         ),
