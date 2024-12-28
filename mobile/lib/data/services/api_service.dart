@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:mobile/data/data_sources/local/share_preferences.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import '../../constants/api_url.dart';
 
 enum Method { get, post, put, delete, patch }
@@ -7,8 +8,17 @@ enum Method { get, post, put, delete, patch }
 class ApiService {
   final Dio _dio = Dio();
 
+  static final _prettyDioLogger = PrettyDioLogger(
+    requestHeader: true,
+    requestBody: true,
+    responseHeader: false,
+    error: true,
+    compact: true,
+    maxWidth: 90,
+  );
+
   ApiService() {
-    var accessToken = SharedPrefer.sharedPrefer.getUserToken();
+    final accessToken = SharedPrefer.sharedPrefer.getUserToken();
 
     print("Access Token: ${accessToken}");
     _dio.options = BaseOptions(
@@ -21,6 +31,7 @@ class ApiService {
       contentType: 'application/json',
       responseType: ResponseType.json,
     );
+    _dio.interceptors.add(_prettyDioLogger);
   }
 
   Future<Response> request(

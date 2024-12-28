@@ -37,9 +37,8 @@ class _LoginBodyState extends State<LoginBody> {
             context,
             AppRoutes.mainScreen,
           );
-        } else if (state.status == LoginStatus.processing) {
-          EasyLoading.show();
         }
+        state.status == LoginStatus.processing ? EasyLoading.show() : EasyLoading.dismiss();
       },
       child: BlocConsumer<LoginBloc, LoginState>(
         listener: (context, state) {
