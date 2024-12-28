@@ -43,22 +43,18 @@ class Constants {
   static const String validate = 'Validate';
   static const String example1 =
       ' At Parking Lot, your privacy is important to us. We collect and use your personal information to provide parking services, including: ';
-  static const String example2 =
-      "- Information Collected: Name, email, phone number, location, and device details.";
-  static const String example3 =
-      "- How We Use It: To process bookings, payments, and send notifications.";
+  static const String example2 = "- Information Collected: Name, email, phone number, location, and device details.";
+  static const String example3 = "- How We Use It: To process bookings, payments, and send notifications.";
   static const String example4 =
       "- Sharing: We do not share your data except with trusted partners for service delivery or when required by law.";
   static const String example5 =
       "- Data Security: We take reasonable steps to protect your data but cannot guarantee complete security.";
-  static const String example6 =
-      "- Your Rights: You can access, update, or delete your personal information anytime.";
-  static const String example7 =
-      "By using the app, you agree to this policy. For more details, contact us at ";
+  static const String example6 = "- Your Rights: You can access, update, or delete your personal information anytime.";
+  static const String example7 = "By using the app, you agree to this policy. For more details, contact us at ";
   static const String emailDieu = 'tranhuyendieuit@gmail.com';
   static const String parkingLot = 'Parking Lot';
   static const String notification = 'Notification';
-  static const String viewIncommingRides = 'View Payment History';
+  static const String paymentHistory = 'Payment History';
   static const String parkingHistory = 'Parking History';
   static const String contactPolice = 'Contact Police';
   static const String vehicle = 'VEHICLE';

@@ -193,7 +193,7 @@ class _HomeBodyState extends State<HomeBody> with AutomaticKeepAliveClientMixin 
                       icon: const Icon(Icons.circle_notifications, color: AppColors.mountainMeadow, size: 40),
                       onPress: () {}),
                   CardOption(
-                      name: Constants.viewIncommingRides,
+                      name: Constants.paymentHistory,
                       icon: const Icon(Icons.person_3_outlined, color: AppColors.mountainMeadow, size: 40),
                       onPress: () {
                         Navigator.pushNamed(context, AppRoutes.paymentHistory);
@@ -214,7 +214,11 @@ class _HomeBodyState extends State<HomeBody> with AutomaticKeepAliveClientMixin 
                         color: AppColors.mountainMeadow,
                       ),
                       onPress: () {
-                        Navigator.pushNamed(context, AppRoutes.parkingHistory);
+                        Navigator.pushNamed(
+                          context,
+                          AppRoutes.parkingHistory,
+                          arguments: state.user?.vehicles?.first.plateNumber ?? "",
+                        );
                       }),
                   CardOption(
                       name: Constants.contactPolice,

@@ -13,12 +13,11 @@ class ParkingHistoryRepository {
       final response = await _apiService.request(
         ApiUrls.trackingEndpoint,
         method: Method.post,
-        data: {"keyword": "string", "page": 0, "page_size": 20, "type": 0},
+        data: {"keyword": "string", "page": 0, "page_size": 100, "type": 0},
       );
       if (response.data != null) {
-        final parkingHistory = List<ParkingHistoryModel>.from(response
-            .data['data']['data_list']
-            .map((x) => ParkingHistoryModel.fromJson(x)));
+        final parkingHistory =
+            (response.data['data']['data_list'] as List? ?? []).map((e) => ParkingHistoryModel.fromJson(e)).toList();
 
         return Right(parkingHistory);
       } else {
