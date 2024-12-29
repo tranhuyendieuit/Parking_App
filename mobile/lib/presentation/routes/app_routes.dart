@@ -4,7 +4,9 @@ import 'package:mobile/presentation/screens/auth/register/pages/register_page.da
 import 'package:mobile/presentation/screens/contact_police/page/contact_police_page.dart';
 import 'package:mobile/presentation/screens/home/page/home_page.dart';
 import 'package:mobile/presentation/screens/home/page/main_screen.dart';
+import 'package:mobile/presentation/screens/parking_detail/page/parking_detail_page.dart';
 import 'package:mobile/presentation/screens/parking_history/page/parking_history_page.dart';
+import 'package:mobile/presentation/screens/parking_list/page/parking_list_page.dart';
 import 'package:mobile/presentation/screens/payment_history/page/payment_history_page.dart';
 import 'package:mobile/presentation/screens/profile/bloc/presentation/privacy_policy/page/privacy_policy_page.dart';
 import 'package:mobile/presentation/screens/profile/page/profile_page.dart';
@@ -24,6 +26,8 @@ class AppRoutes {
   static const String qrCode = '/qr-code';
   static const String mainScreen = '/main-screen';
   static const String paymentHistory = '/payment-history';
+  static const String parkingList = '/parking-list';
+  static const String parkingDetail = '/parking-detail';
 
   static getInitialRoute() {
     return '/';
@@ -43,6 +47,8 @@ class AppRoutes {
       contactPolice: (BuildContext context) => const ContactPolicePage(),
       qrCode: (BuildContext context) => const QrScanPage(),
       paymentHistory: (BuildContext context) => const PaymentHistoryPage(),
+      parkingList: (BuildContext context) => const ParkingListPage(),
+      parkingDetail: (BuildContext context) => const ParkingDetailPage(),
     };
   }
 }
