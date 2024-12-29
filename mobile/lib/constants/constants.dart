@@ -53,7 +53,8 @@ class Constants {
   static const String example7 = "By using the app, you agree to this policy. For more details, contact us at ";
   static const String emailDieu = 'tranhuyendieuit@gmail.com';
   static const String parkingLot = 'Parking Lot';
-  static const String notification = 'Notification';
+  static const String parkingList = 'Parking List';
+  static const String parkingDetail = 'Parking Detail';
   static const String paymentHistory = 'Payment History';
   static const String parkingHistory = 'Parking History';
   static const String contactPolice = 'Contact Police';

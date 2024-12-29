@@ -189,9 +189,10 @@ class _HomeBodyState extends State<HomeBody> with AutomaticKeepAliveClientMixin 
                 spacing: 10,
                 children: [
                   CardOption(
-                      name: Constants.notification,
-                      icon: const Icon(Icons.circle_notifications, color: AppColors.mountainMeadow, size: 40),
-                      onPress: () {}),
+                    name: Constants.parkingList,
+                    icon: const Icon(Icons.local_parking_rounded, color: AppColors.mountainMeadow, size: 40),
+                    onPress: () => Navigator.pushNamed(context, AppRoutes.parkingList),
+                  ),
                   CardOption(
                       name: Constants.paymentHistory,
                       icon: const Icon(Icons.person_3_outlined, color: AppColors.mountainMeadow, size: 40),
