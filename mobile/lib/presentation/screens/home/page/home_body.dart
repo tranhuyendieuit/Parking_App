@@ -38,7 +38,6 @@ class _HomeBodyState extends State<HomeBody> with AutomaticKeepAliveClientMixin 
         appBar: AppBarWidget(
           icon: Icons.menu,
           onPressLeftButton: () {
-            print("object");
             if (_scaffoldKey.currentState == null) {
               print("Scaffold key is null");
             } else {

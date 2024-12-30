@@ -25,6 +25,7 @@ class SharedPrefer {
     return _prefsInstance.getString(SharedPreferencesKey.accessToken) ?? "";
   }
 
-
-
+  Future<void> clearUserToken() async {
+    await _prefsInstance.remove(SharedPreferencesKey.accessToken);
+  }
 }

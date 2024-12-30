@@ -17,7 +17,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       password: state.password,
       username: state.username,
     );
-    print("User send: ${state.username}| pass send: ${state.password}");
 
     final result = await AuthRepository().login(userModel);
 
@@ -27,7 +26,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           status: LoginStatus.failure,
           errormessage: error,
         ));
-        print('Login Error: ${error}');
       },
       (response) {
         emit(state.copyWith(status: LoginStatus.success));

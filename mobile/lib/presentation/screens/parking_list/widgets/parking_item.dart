@@ -11,7 +11,9 @@ class ParkingItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: Colors.white,
       margin: const EdgeInsets.only(bottom: 8),
+      elevation: 8,
       child: InkWell(
         onTap: onTap,
         child: Container(
@@ -26,12 +28,12 @@ class ParkingItem extends StatelessWidget {
                       item.address ?? '',
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,
-                      style: AppTextStyles.montserratStyle.bold14Black,
+                      style: AppTextStyles.montserratStyle.bold12Black,
                     ),
                     const SizedBox(height: 8),
                     Text(
                       'Capacity: ${item.capacity ?? 0}',
-                      style: AppTextStyles.montserratStyle.regular14Black,
+                      style: AppTextStyles.montserratStyle.regular12Black,
                     )
                   ],
                 ),

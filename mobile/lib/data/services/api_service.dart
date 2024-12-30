@@ -19,8 +19,6 @@ class ApiService {
 
   ApiService() {
     final accessToken = SharedPrefer.sharedPrefer.getUserToken();
-
-    print("Access Token: ${accessToken}");
     _dio.options = BaseOptions(
       baseUrl: ApiUrls.baseUrl,
       connectTimeout: const Duration(milliseconds: 5000),

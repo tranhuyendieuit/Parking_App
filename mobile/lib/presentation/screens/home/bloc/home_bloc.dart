@@ -25,14 +25,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     result.fold(
       (error) {
         emit(state.copyWith(status: HomeStatus.failure));
-        print("Error fetching user info: $error");
       },
       (user) {
         emit(state.copyWith(
           status: HomeStatus.success,
           user: user,
         ));
-        print("User information: ${user.toJson()}");
       },
     );
   }

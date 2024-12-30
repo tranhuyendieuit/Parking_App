@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile/data/models/register_model.dart';
-import 'package:mobile/data/models/user_model.dart';
 import 'package:mobile/data/repositories/auth_repository.dart';
 import 'package:mobile/presentation/screens/auth/register/bloc/register_event.dart';
 import 'package:mobile/presentation/screens/auth/register/bloc/register_state.dart';

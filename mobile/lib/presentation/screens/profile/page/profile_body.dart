@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile/config/themes/app_colors.dart';
+import 'package:mobile/config/themes/app_images.dart';
 import 'package:mobile/config/themes/app_text_styles.dart';
 import 'package:mobile/constants/constants.dart';
+import 'package:mobile/data/data_sources/local/share_preferences.dart';
 import 'package:mobile/presentation/components/app_bar_widget.dart';
 import 'package:mobile/presentation/components/custom_button.dart';
 import 'package:mobile/presentation/screens/home/bloc/home_bloc.dart';
@@ -27,8 +29,11 @@ class _ProfileBodyState extends State<ProfileBody>
       final user = state.user;
       return Scaffold(
         backgroundColor: AppColors.white,
-        appBar: const AppBarWidget(
+        appBar: AppBarWidget(
           title: Constants.profile,
+          backgroundColor: AppColors.mountainMeadow,
+          iconColor: AppColors.white,
+          titleStyle: AppTextStyles.montserratStyle.bold16White,
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -37,11 +42,11 @@ class _ProfileBodyState extends State<ProfileBody>
             child: Column(
               children: [
                 const SizedBox(height: 10),
-                const CircleAvatar(
+                CircleAvatar(
                   radius: 40,
                   backgroundImage:
-                      NetworkImage('https://via.placeholder.com/150'),
-                  child: Align(
+                      AssetImage(AppImages.defaultAvatar.webpAssetPath),
+                  child: const Align(
                     alignment: Alignment.bottomRight,
                     child: CircleAvatar(
                       radius: 12,
@@ -88,8 +93,34 @@ class _ProfileBodyState extends State<ProfileBody>
                     icon: Icons.help_outline, text: Constants.helpSupport),
                 const ProfileOption(
                     icon: Icons.settings, text: Constants.settings),
-                const ProfileOption(
-                    icon: Icons.logout_outlined, text: Constants.logout),
+                ProfileOption(
+                  icon: Icons.logout_outlined,
+                  text: Constants.logout,
+                  onTap: () async {
+                    await SharedPrefer.sharedPrefer.clearUserToken();
+
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: const Row(
+                          children: [
+                            Icon(Icons.check_circle, color: Colors.white),
+                            SizedBox(width: 8),
+                            Text(Constants.logoutSuccessfully),
+                          ],
+                        ),
+                        duration: const Duration(seconds: 2),
+                        backgroundColor: AppColors.mountainMeadow,
+                        behavior: SnackBarBehavior.floating,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                    );
+
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, '/login', (Route<dynamic> route) => false);
+                  },
+                ),
               ],
             ),
           ),

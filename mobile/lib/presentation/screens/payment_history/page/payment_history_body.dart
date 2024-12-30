@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:mobile/config/themes/app_colors.dart';
 import 'package:mobile/config/themes/app_text_styles.dart';
+import 'package:mobile/constants/constants.dart';
 import 'package:mobile/presentation/components/app_bar_widget.dart';
 import 'package:mobile/presentation/screens/payment_history/widget/payment_card.dart';
 
@@ -20,13 +21,15 @@ class _PaymentHistoryBodyState extends State<PaymentHistoryBody> {
   Widget build(BuildContext context) {
     return BlocConsumer<PaymentHistoryBloc, PaymentHistoryState>(
       listener: (context, state) {
-        state.status == PaymentHistoryStatus.processing ? EasyLoading.show() : EasyLoading.dismiss();
+        state.status == PaymentHistoryStatus.processing
+            ? EasyLoading.show()
+            : EasyLoading.dismiss();
       },
       builder: (context, state) {
         return Scaffold(
           backgroundColor: AppColors.white,
           appBar: AppBarWidget(
-            title: 'Payment History',
+            title: Constants.paymentHistory,
             backgroundColor: AppColors.mountainMeadow,
             iconColor: AppColors.white,
             titleStyle: AppTextStyles.montserratStyle.bold16White,
@@ -38,7 +41,8 @@ class _PaymentHistoryBodyState extends State<PaymentHistoryBody> {
                 width: double.infinity,
                 decoration: const BoxDecoration(
                   color: AppColors.mountainMeadow,
-                  borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
+                  borderRadius:
+                      BorderRadius.vertical(bottom: Radius.circular(20)),
                 ),
                 child: Center(
                   child: Text(

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/config/themes/app_colors.dart';
+import 'package:mobile/config/themes/app_images.dart';
 import 'package:mobile/config/themes/app_text_styles.dart';
 import 'package:mobile/data/models/payment_model.dart';
 import 'package:mobile/utils/format_time.dart';
@@ -27,7 +29,11 @@ class PaymentCard extends StatelessWidget {
                   height: 50,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: Colors.orange[100],
+                    image: DecorationImage(
+                      image: AssetImage(AppImages.defaultAvatar.webpAssetPath),
+                      fit: BoxFit
+                          .cover, // Đảm bảo hình ảnh hiển thị toàn bộ trong Container
+                    ),
                   ),
                 ),
                 const SizedBox(width: 16),
@@ -53,7 +59,11 @@ class PaymentCard extends StatelessWidget {
               text: TextSpan(
                 text: 'Type: ',
                 style: AppTextStyles.montserratStyle.bold12Black,
-                children: [TextSpan(text: payment.name, style: AppTextStyles.montserratStyle.regular12Black)],
+                children: [
+                  TextSpan(
+                      text: payment.name,
+                      style: AppTextStyles.montserratStyle.regular12Black)
+                ],
               ),
             ),
             const SizedBox(height: 4),
@@ -63,7 +73,8 @@ class PaymentCard extends StatelessWidget {
                 style: AppTextStyles.montserratStyle.bold12Black,
                 children: [
                   TextSpan(
-                    text: '${payment.startDate.toFormattedDateTime()} - ${payment.endDate.toFormattedDateTime()}',
+                    text:
+                        '${payment.startDate.toFormattedDateTime()} - ${payment.endDate.toFormattedDateTime()}',
                     style: AppTextStyles.montserratStyle.regular12Black,
                   )
                 ],

@@ -2,7 +2,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mobile/config/themes/app_colors.dart';
 import 'package:mobile/config/themes/app_icons.dart';
 import 'package:mobile/config/themes/app_text_styles.dart';
@@ -38,12 +37,30 @@ class _LoginBodyState extends State<LoginBody> {
             AppRoutes.mainScreen,
           );
         }
-        state.status == LoginStatus.processing ? EasyLoading.show() : EasyLoading.dismiss();
+        state.status == LoginStatus.processing
+            ? EasyLoading.show()
+            : EasyLoading.dismiss();
       },
       child: BlocConsumer<LoginBloc, LoginState>(
         listener: (context, state) {
           if (state.status == LoginStatus.success) {
-            Fluttertoast.showToast(msg: Constants.loginSuccessful);
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: const Row(
+                  children: [
+                    Icon(Icons.check_circle, color: Colors.white),
+                    SizedBox(width: 8),
+                    Text(Constants.loginSuccessfully),
+                  ],
+                ),
+                duration: const Duration(seconds: 2),
+                backgroundColor: AppColors.mountainMeadow,
+                behavior: SnackBarBehavior.floating,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+            );
           }
         },
         builder: (context, state) {
@@ -67,9 +84,9 @@ class _LoginBodyState extends State<LoginBody> {
                         hintText: Constants.enterYourUserName,
                         initialValue: state.username,
                         onChanged: (value) {
-                          context
-                              .read<LoginBloc>()
-                              .add(LoginChangeEmailPasswordEvent(username: value, password: state.password));
+                          context.read<LoginBloc>().add(
+                              LoginChangeEmailPasswordEvent(
+                                  username: value, password: state.password));
                         },
                       ),
                       const SizedBox(height: 16),
@@ -79,9 +96,9 @@ class _LoginBodyState extends State<LoginBody> {
                         isPasswordInput: true,
                         initialValue: state.password,
                         onChanged: (value) {
-                          context
-                              .read<LoginBloc>()
-                              .add(LoginChangeEmailPasswordEvent(username: state.username, password: value));
+                          context.read<LoginBloc>().add(
+                              LoginChangeEmailPasswordEvent(
+                                  username: state.username, password: value));
                         },
                       ),
                       const SizedBox(height: 16),
@@ -107,13 +124,15 @@ class _LoginBodyState extends State<LoginBody> {
                           ),
                           const Spacer(),
                           TextButton(
-                            style: TextButton.styleFrom(padding: EdgeInsets.zero),
+                            style:
+                                TextButton.styleFrom(padding: EdgeInsets.zero),
                             onPressed: () {
                               // Handle forgot password
                             },
                             child: Text(
                               Constants.forgotPassword,
-                              style: AppTextStyles.montserratStyle.regular10MountainMeadow,
+                              style: AppTextStyles
+                                  .montserratStyle.regular10MountainMeadow,
                             ),
                           ),
                         ],
@@ -122,7 +141,9 @@ class _LoginBodyState extends State<LoginBody> {
                       CustomButton(
                         text: Constants.login,
                         onTap: () {
-                          context.read<LoginBloc>().add(LoginWithUsernamePasswordEvent());
+                          context
+                              .read<LoginBloc>()
+                              .add(LoginWithUsernamePasswordEvent());
                         },
                         height: 50,
                         width: 260,
@@ -130,12 +151,17 @@ class _LoginBodyState extends State<LoginBody> {
                       const SizedBox(height: 16),
                       Row(
                         children: [
-                          const Expanded(child: Divider(color: AppColors.cadetGrey)),
+                          const Expanded(
+                              child: Divider(color: AppColors.cadetGrey)),
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                            child: Text(Constants.orLoginWith, style: AppTextStyles.montserratStyle.regular10DimGray),
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: Text(Constants.orLoginWith,
+                                style: AppTextStyles
+                                    .montserratStyle.regular10DimGray),
                           ),
-                          const Expanded(child: Divider(color: AppColors.cadetGrey)),
+                          const Expanded(
+                              child: Divider(color: AppColors.cadetGrey)),
                         ],
                       ),
                       const SizedBox(height: 5),
@@ -157,10 +183,12 @@ class _LoginBodyState extends State<LoginBody> {
                           children: [
                             TextSpan(
                                 text: Constants.register,
-                                style: AppTextStyles.montserratStyle.bold13Black,
+                                style:
+                                    AppTextStyles.montserratStyle.bold13Black,
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
-                                    Navigator.pushNamed(context, AppRoutes.register);
+                                    Navigator.pushNamed(
+                                        context, AppRoutes.register);
                                   }),
                           ],
                         ),

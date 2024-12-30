@@ -19,8 +19,11 @@ class ParkingHistoryBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
-      appBar: const AppBarWidget(
+      appBar: AppBarWidget(
         title: Constants.parkingHistory,
+        backgroundColor: AppColors.mountainMeadow,
+        iconColor: AppColors.white,
+        titleStyle: AppTextStyles.montserratStyle.bold16White,
       ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(20),
@@ -31,7 +34,9 @@ class ParkingHistoryBody extends StatelessWidget {
       ),
       body: BlocConsumer<ParkingHistoryBloc, ParkingHistoryState>(
         listener: (context, state) {
-          state.status == ParkingHistoryStatus.processing ? EasyLoading.show() : EasyLoading.dismiss();
+          state.status == ParkingHistoryStatus.processing
+              ? EasyLoading.show()
+              : EasyLoading.dismiss();
         },
         builder: (context, state) {
           return ListView.builder(
@@ -39,7 +44,8 @@ class ParkingHistoryBody extends StatelessWidget {
             itemBuilder: (context, index) {
               final parkingItem = state.parkingHistory?[index];
               return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                 child: Card(
                   color: AppColors.white,
                   shape: RoundedRectangleBorder(
@@ -56,11 +62,13 @@ class ParkingHistoryBody extends StatelessWidget {
                           children: [
                             Text(
                               Constants.plateNumber,
-                              style: AppTextStyles.montserratStyle.semiBold12MountainMeadow,
+                              style: AppTextStyles
+                                  .montserratStyle.semiBold12MountainMeadow,
                             ),
                             Text(
                               vehiclePlateNumber ?? '',
-                              style: AppTextStyles.montserratStyle.semiBold12MountainMeadow,
+                              style: AppTextStyles
+                                  .montserratStyle.semiBold12MountainMeadow,
                             )
                           ],
                         ),
@@ -70,7 +78,8 @@ class ParkingHistoryBody extends StatelessWidget {
                           children: [
                             Text(
                               Constants.checkInTime,
-                              style: AppTextStyles.montserratStyle.regular12Black,
+                              style:
+                                  AppTextStyles.montserratStyle.regular12Black,
                             ),
                             Text(
                               parkingItem?.checkIn?.toFormattedDateTime() ?? "",
@@ -84,10 +93,14 @@ class ParkingHistoryBody extends StatelessWidget {
                           children: [
                             Text(
                               Constants.checkOutTime,
-                              style: AppTextStyles.montserratStyle.regular12Black,
+                              style:
+                                  AppTextStyles.montserratStyle.regular12Black,
                             ),
-                            Text(parkingItem?.checkOut?.toFormattedDateTime() ?? "",
-                                style: AppTextStyles.montserratStyle.bold12Black),
+                            Text(
+                                parkingItem?.checkOut?.toFormattedDateTime() ??
+                                    "",
+                                style:
+                                    AppTextStyles.montserratStyle.bold12Black),
                           ],
                         ),
                       ],

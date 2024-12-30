@@ -1,5 +1,3 @@
-import 'package:mobile/data/models/vehicle_model.dart';
-
 class RegisterModel {
   final String? userId;
   final String? username;
@@ -70,5 +68,4 @@ class RegisterModel {
       'register_date': registerDate
     };
   }
-
 }

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile/config/themes/app_colors.dart';
 import 'package:mobile/config/themes/app_text_styles.dart';
 import 'package:mobile/constants/constants.dart';
+import 'package:mobile/presentation/components/app_bar_widget.dart';
 import 'package:mobile/presentation/components/custom_button.dart';
 import 'package:mobile/presentation/screens/qr_scan/bloc/qr_scan_bloc.dart';
 import 'package:mobile/presentation/screens/qr_scan/bloc/qr_scan_event.dart';
@@ -37,12 +38,11 @@ class _QrScanBodyState extends State<QrScanBody> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
-      appBar: AppBar(
-        title: Text(
-          Constants.scanQrCode,
-          style: AppTextStyles.montserratStyle.bold16Black,
-        ),
-        centerTitle: true,
+      appBar: AppBarWidget(
+        title: Constants.scanQrCode,
+        backgroundColor: AppColors.mountainMeadow,
+        iconColor: AppColors.white,
+        titleStyle: AppTextStyles.montserratStyle.bold16White,
       ),
       body: Column(
         children: [
@@ -116,8 +116,7 @@ class _QrScanBodyState extends State<QrScanBody> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15),
                           ),
-                          backgroundColor: Colors
-                              .white, 
+                          backgroundColor: Colors.white,
                         ),
                       );
                     } else if (state is QrScanFailure) {

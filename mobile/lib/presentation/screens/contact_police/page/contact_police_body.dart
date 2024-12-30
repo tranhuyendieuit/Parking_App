@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/config/themes/app_colors.dart';
+import 'package:mobile/config/themes/app_text_styles.dart';
 import 'package:mobile/constants/constants.dart';
 import 'package:mobile/data/dummy_data.dart';
 import 'package:mobile/presentation/components/app_bar_widget.dart';
@@ -16,8 +17,11 @@ class _ContactPoliceBodyState extends State<ContactPoliceBody> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
-      appBar: const AppBarWidget(
+      appBar: AppBarWidget(
         title: Constants.contactPolice,
+        backgroundColor: AppColors.mountainMeadow,
+        iconColor: AppColors.white,
+        titleStyle: AppTextStyles.montserratStyle.bold16White,
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -42,15 +46,49 @@ class _ContactPoliceBodyState extends State<ContactPoliceBody> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text(
-                    '${Constants.name} ${police.name}',
+                  Text.rich(
+                    TextSpan(
+                      children: [
+                        TextSpan(
+                          text: '${Constants.name} ',
+                          style: AppTextStyles.montserratStyle.bold12Black,
+                        ),
+                        TextSpan(
+                          text: police.name,
+                          style: AppTextStyles.montserratStyle.regular12Black,
+                        ),
+                      ],
+                    ),
                   ),
-                  Text(
-                    '${Constants.phone} ${police.phone}',
-                    textAlign: TextAlign.center,
+                  const SizedBox(height: 8),
+                  Text.rich(
+                    TextSpan(
+                      children: [
+                        TextSpan(
+                          text: '${Constants.phone} ',
+                          style: AppTextStyles.montserratStyle.bold12Black,
+                        ),
+                        TextSpan(
+                          text: police.phone,
+                          style: AppTextStyles.montserratStyle.regular12Black,
+                        ),
+                      ],
+                    ),
                   ),
-                  Text(
-                    '${Constants.agency} ${police.agency}',
+                  const SizedBox(height: 8),
+                  Text.rich(
+                    TextSpan(
+                      children: [
+                        TextSpan(
+                          text: '${Constants.agency} ',
+                          style: AppTextStyles.montserratStyle.bold12Black,
+                        ),
+                        TextSpan(
+                          text: police.agency,
+                          style: AppTextStyles.montserratStyle.regular12Black,
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),

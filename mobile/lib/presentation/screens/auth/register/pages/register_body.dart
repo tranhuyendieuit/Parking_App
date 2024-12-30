@@ -31,7 +31,23 @@ class _RegisterBodyState extends State<RegisterBody> {
               msg: state.errormessage, toastLength: Toast.LENGTH_LONG);
         }
         if (state.status == RegisterStatus.success) {
-          Fluttertoast.showToast(msg: Constants.registerSuccess);
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: const Row(
+                children: [
+                  Icon(Icons.check_circle, color: Colors.white),
+                  SizedBox(width: 8),
+                  Text(Constants.registerSuccessfully),
+                ],
+              ),
+              duration: const Duration(seconds: 2),
+              backgroundColor: AppColors.mountainMeadow,
+              behavior: SnackBarBehavior.floating,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+          );
           Navigator.pop(context);
         }
       },

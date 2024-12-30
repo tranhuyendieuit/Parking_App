@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mobile/config/themes/app_colors.dart';
 import 'package:mobile/presentation/screens/auth/register/bloc/register_bloc.dart';
 import 'package:mobile/presentation/screens/auth/register/pages/register_body.dart';
 

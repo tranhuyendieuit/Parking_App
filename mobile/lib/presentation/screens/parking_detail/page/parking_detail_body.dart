@@ -23,7 +23,9 @@ class ParkingDetailBody extends StatelessWidget {
       ),
       body: BlocConsumer<ParkingDetailBloc, ParkingDetailState>(
         listener: (context, state) {
-          state.status == ParkingDetailStatus.processing ? EasyLoading.show() : EasyLoading.dismiss();
+          state.status == ParkingDetailStatus.processing
+              ? EasyLoading.show()
+              : EasyLoading.dismiss();
         },
         builder: (context, state) {
           return Padding(
@@ -34,7 +36,7 @@ class ParkingDetailBody extends StatelessWidget {
                 if (state.parkingDetail?.address?.isNotEmpty ?? false)
                   RichText(
                     text: TextSpan(
-                      text: 'Parking Name: ',
+                      text: 'Parking Address: ',
                       style: AppTextStyles.montserratStyle.bold14Black,
                       children: [
                         TextSpan(
