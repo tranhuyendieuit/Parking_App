@@ -3,8 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mobile/config/themes/app_colors.dart';
+import 'package:mobile/config/themes/app_images.dart';
 import 'package:mobile/config/themes/app_text_styles.dart';
 import 'package:mobile/constants/constants.dart';
+import 'package:mobile/data/data_sources/local/share_preferences.dart';
 import 'package:mobile/presentation/components/app_bar_widget.dart';
 import 'package:mobile/presentation/components/avatar.dart';
 import 'package:mobile/presentation/routes/app_routes.dart';
@@ -19,7 +21,8 @@ class HomeBody extends StatefulWidget {
   State<HomeBody> createState() => _HomeBodyState();
 }
 
-class _HomeBodyState extends State<HomeBody> with AutomaticKeepAliveClientMixin {
+class _HomeBodyState extends State<HomeBody>
+    with AutomaticKeepAliveClientMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   bool get wantKeepAlive => true;
@@ -58,11 +61,10 @@ class _HomeBodyState extends State<HomeBody> with AutomaticKeepAliveClientMixin 
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const CircleAvatar(
+                      CircleAvatar(
                         radius: 40,
-                        backgroundImage: NetworkImage(
-                          'https://via.placeholder.com/150',
-                        ),
+                        backgroundImage:
+                            AssetImage(AppImages.defaultAvatar.webpAssetPath),
                       ),
                       const SizedBox(height: 10),
                       Text(
@@ -99,9 +101,7 @@ class _HomeBodyState extends State<HomeBody> with AutomaticKeepAliveClientMixin 
                   Constants.purchaseHistory,
                   style: AppTextStyles.montserratStyle.regular12Black,
                 ),
-                onTap: () {
-                  // Handle navigation or action
-                },
+                onTap: () {},
               ),
               ListTile(
                 leading: const Icon(
@@ -112,9 +112,7 @@ class _HomeBodyState extends State<HomeBody> with AutomaticKeepAliveClientMixin 
                   Constants.helpSupport,
                   style: AppTextStyles.montserratStyle.regular12Black,
                 ),
-                onTap: () {
-                  // Handle navigation or action
-                },
+                onTap: () {},
               ),
               ListTile(
                 leading: const Icon(
@@ -138,8 +136,29 @@ class _HomeBodyState extends State<HomeBody> with AutomaticKeepAliveClientMixin 
                   Constants.logout,
                   style: AppTextStyles.montserratStyle.regular12Black,
                 ),
-                onTap: () {
-                  // Handle navigation or action
+                onTap: () async {
+                  await SharedPrefer.sharedPrefer.clearUserToken();
+
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: const Row(
+                        children: [
+                          Icon(Icons.check_circle, color: Colors.white),
+                          SizedBox(width: 8),
+                          Text(Constants.logoutSuccessfully),
+                        ],
+                      ),
+                      duration: const Duration(seconds: 2),
+                      backgroundColor: AppColors.mountainMeadow,
+                      behavior: SnackBarBehavior.floating,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  );
+
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, '/login', (Route<dynamic> route) => false);
                 },
               ),
             ],
@@ -148,7 +167,8 @@ class _HomeBodyState extends State<HomeBody> with AutomaticKeepAliveClientMixin 
         body: SingleChildScrollView(
           child: Column(
             children: [
-              Text(Constants.parkingLot, style: AppTextStyles.montserratStyle.black20Bold),
+              Text(Constants.parkingLot,
+                  style: AppTextStyles.montserratStyle.mountainMeadow22Bold),
               const SizedBox(
                 height: 10,
               ),
@@ -173,8 +193,11 @@ class _HomeBodyState extends State<HomeBody> with AutomaticKeepAliveClientMixin 
                         user.email ?? '',
                       ),
                       Text(
-                        user.vehicles != null && (user.vehicles?.isNotEmpty ?? false)
-                            ? user.vehicles!.map((v) => v.plateNumber).join(', ')
+                        user.vehicles != null &&
+                                (user.vehicles?.isNotEmpty ?? false)
+                            ? user.vehicles!
+                                .map((v) => v.plateNumber)
+                                .join(', ')
                             : 'No Plate Info',
                       ),
                     ]
@@ -189,12 +212,15 @@ class _HomeBodyState extends State<HomeBody> with AutomaticKeepAliveClientMixin 
                 children: [
                   CardOption(
                     name: Constants.parkingList,
-                    icon: const Icon(Icons.local_parking_rounded, color: AppColors.mountainMeadow, size: 40),
-                    onPress: () => Navigator.pushNamed(context, AppRoutes.parkingList),
+                    icon: const Icon(Icons.local_parking_rounded,
+                        color: AppColors.mountainMeadow, size: 40),
+                    onPress: () =>
+                        Navigator.pushNamed(context, AppRoutes.parkingList),
                   ),
                   CardOption(
                       name: Constants.paymentHistory,
-                      icon: const Icon(Icons.person_3_outlined, color: AppColors.mountainMeadow, size: 40),
+                      icon: const Icon(Icons.person_3_outlined,
+                          color: AppColors.mountainMeadow, size: 40),
                       onPress: () {
                         Navigator.pushNamed(context, AppRoutes.paymentHistory);
                       }),
@@ -217,7 +243,8 @@ class _HomeBodyState extends State<HomeBody> with AutomaticKeepAliveClientMixin 
                         Navigator.pushNamed(
                           context,
                           AppRoutes.parkingHistory,
-                          arguments: state.user?.vehicles?.first.plateNumber ?? "",
+                          arguments:
+                              state.user?.vehicles?.first.plateNumber ?? "",
                         );
                       }),
                   CardOption(

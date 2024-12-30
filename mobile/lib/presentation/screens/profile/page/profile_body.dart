@@ -116,7 +116,6 @@ class _ProfileBodyState extends State<ProfileBody>
                         ),
                       ),
                     );
-
                     Navigator.pushNamedAndRemoveUntil(
                         context, '/login', (Route<dynamic> route) => false);
                   },
